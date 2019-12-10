@@ -7,9 +7,10 @@ CREATE DATABASE calendar3000;
 
 CREATE TABLE people (
 id SERIAL PRIMARY KEY,
-name VARCHAR(40)
+name VARCHAR(40), 
+email VARCHAR(255)
 );     
-insert into people (name) values ('finch'), ('wren'); 
+insert into people (name, email) values ('finch', 'finch@example.com'), ('wren', 'wbird@example.com'); 
 
 
 CREATE TABLE events (
@@ -26,7 +27,7 @@ insert into events (fk_id, data ) VALUES (1, '{
 "date": "2019-11-13",
 "color": "#ff0000", 
 "note":"Example entry. This is a note. It could be empty. That would be OK. Remember to escape apostrophes!"
-}')
+}');
 
 
         
