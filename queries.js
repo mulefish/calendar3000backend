@@ -184,19 +184,37 @@ const getHolidaysByYear = (request, response) => {
     }
   })
 }
+
+const createPerson = (request, response) => {
+  console.log("hello kitty ")
+  response.status(200).json("Hello world")
+  // const { name, email } = request.body
+  // caller.msg(`name ${name} email ${email}`)
+  // pool.query('INSERT INTO people (name, email) VALUES ($1, $2)', [name, email], (error, results) => {
+  //   if (error) {
+  //     caller.errorMsg( error )
+  //     response.status(500).send(`createPerson fail ${error}`)
+  //   }
+  //   else {
+  //     response.status(200).json("Person added")
+  //   }
+  // })
+}
+
 // /////////////////////// END CALENDAR 3000 //////////////////////
 
 
 
 module.exports = {
-  getUsers,
-  getUserById,
-  createUser,
-  updateUser,
-  deleteUser,
-  insertJsonObject,
-  getJsonObjects,
-  getJsonObjectsById,
+  // getUsers,
+  // getUserById,
+  // createUser,
+  // updateUser,
+  // deleteUser,
+  // insertJsonObject,
+  // getJsonObjects,
+  // getJsonObjectsById,
   showDBMsg,
-  getHolidaysByYear
+  getHolidaysByYear,
+  createPerson
 }

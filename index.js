@@ -20,23 +20,24 @@ app.use(
 app.get('/', (request, response) => {
   response.json({ info: 'Node.js, Express, and Postgres API and NoSQL w/ Postgres' })
 })
-// /////////////////////// TRADITIONAL //////////////////////////////////////////
+// // /////////////////////// TRADITIONAL //////////////////////////////////////////
 
-app.get('/users', db.getUsers)
-app.get('/users/:id', db.getUserById)
-app.post('/users', db.createUser)
-app.put('/users/:id', db.updateUser)
-app.delete('/users/:id', db.deleteUser)
+// app.get('/users', db.getUsers)
+// app.get('/users/:id', db.getUserById)
+// app.post('/users', db.createUser)
+// app.put('/users/:id', db.updateUser)
+// app.delete('/users/:id', db.deleteUser)
 
-// /////////////////////// NO-SQL //////////////////////////////////////////////////
-app.post('/jsonObj', db.insertJsonObject)
-app.get('/jsonObj', db.getJsonObjects)
-app.get('/jsonObj/:id', db.getJsonObjectsById)
+// // /////////////////////// NO-SQL //////////////////////////////////////////////////
+// app.post('/jsonObj', db.insertJsonObject)
+// app.get('/jsonObj', db.getJsonObjects)
+// app.get('/jsonObj/:id', db.getJsonObjectsById)
 
 // /////////////////////// Calendar3000 ///////////////////////////////////////////
 
 app.get('/holidays/:year', db.getHolidaysByYear)
-                              
+app.post('/people', db.createPerson)                              
+
 
 // /////////////////////// LISTENER ///////////////////////////////////////////
 
