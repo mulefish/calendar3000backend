@@ -16,16 +16,16 @@ CREATE TABLE events (
 id SERIAL,
 fk_id integer REFERENCES people(id) ON DELETE CASCADE,
 data JSON,
-CONSTRAINT clr CHECK (length(data->>'clr') > 0 AND (data->>'clr') IS NOT NULL ),
+CONSTRAINT color CHECK (length(data->>'color') > 0 AND (data->>'color') IS NOT NULL ),
 CONSTRAINT date CHECK (length(data->>'date') > 0 AND (data->>'date') IS NOT NULL ),
 CONSTRAINT note CHECK (length(data->>'note') IS NOT NULL ),
 PRIMARY KEY (id,fk_id)
 );
 
-insert into events (fk_id, data ) VALUES (2, '{
+insert into events (fk_id, data ) VALUES (1, '{
 "date": "2019-11-13",
-"clr": "#ff0000", 
-"note":"A finch is a sort of bird. Many people overlook them, but they are missing something"
+"color": "#ff0000", 
+"note":"Example entry. This is a note. It could be empty. That would be OK. Remember to escape apostrophes!"
 }')
 
 
