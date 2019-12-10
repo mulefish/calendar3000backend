@@ -1,14 +1,18 @@
 const {Caller} = require('./Caller.js');
 const caller = new Caller(); 
 const Pool = require('pg').Pool
+const database = 'calendar3000'
 const pool = new Pool({
   user: 'me',
   host: 'localhost',
-  database: 'api',
+  database: database,
   password: 'password',
   port: 5432,
 })
 
+const showDBMsg = () => {
+  caller.msg("database " + database)
+}
 // /////////////////////// NO-SQL //////////////////////////////////////////
 const insertJsonObject = (request, response) => {
     caller.showStack()
@@ -56,6 +60,28 @@ const getJsonObjectsById = (request, response) => {
     }
   })
 }
+
+
+const getHolidaysForYear = (request, response) => {
+  caller.showStack()
+  const id = parseInt(request.params.id)
+  let sql = "SELECT * FROM validatedTable WHERE (data #>> '{id}')::numeric = $1"
+  const d1 = new Date().getTime() 
+
+  pool.query(sql, [id], (error, results) => {
+
+    if (error) {
+      console.log("Error " + error )
+      response.status(500).send(`getUserById fail ${error}`)
+    } else {
+      const d2 = new Date().getTime() 
+      console.log("MS elapsed " + ( d2 - d1 ))
+      response.status(200).json(results.rows)
+    }
+  })
+}
+
+
 
 
 
@@ -151,5 +177,6 @@ module.exports = {
   deleteUser,
   insertJsonObject,
   getJsonObjects,
-  getJsonObjectsById
+  getJsonObjectsById,
+  showDBMsg
 }
