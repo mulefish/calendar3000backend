@@ -85,7 +85,6 @@ const getHolidaysForYear = (request, response) => {
 
 
 
-// ////////////////////// END NO-SQL ///////////////////////////////////////////
 
 // /////////////////////// TRADITIONAL //////////////////////////////////////////
 
@@ -166,7 +165,27 @@ const deleteUser = (request, response) => {
   })
 }
 
-// /////////////////////// END TRADITIONAL //////////////////////////////////////////
+
+// /////////////////////// calendar3000 //////////////////////////////////////////
+
+
+const getHolidaysByYear = (request, response) => {
+  caller.showStack()
+  const year = parseInt(request.params.year)
+  const d1 = new Date().getTime() 
+  pool.query('SELECT data FROM holidays WHERE year = $1', [year], (error, results) => {
+    if (error) {
+      caller.errorMsg( error )
+      response.status(500).send(`getHolidaysByYear fail ${error}`)
+    } else {
+      const d2 = new Date().getTime() 
+      caller.msg("MS elapsed " + (d2 - d1))
+      response.status(200).json(results.rows)
+    }
+  })
+}
+// /////////////////////// END CALENDAR 3000 //////////////////////
+
 
 
 module.exports = {
@@ -178,5 +197,6 @@ module.exports = {
   insertJsonObject,
   getJsonObjects,
   getJsonObjectsById,
-  showDBMsg
+  showDBMsg,
+  getHolidaysByYear
 }

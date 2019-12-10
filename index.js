@@ -35,6 +35,10 @@ app.get('/jsonObj/:id', db.getJsonObjectsById)
 
 // /////////////////////// Calendar3000 ///////////////////////////////////////////
 
+app.get('/holidays/:year', db.getHolidaysByYear)
+                              
+
+// /////////////////////// LISTENER ///////////////////////////////////////////
 
 app.listen(port, () => {
   // console.log(`App running on port ${port}.`)

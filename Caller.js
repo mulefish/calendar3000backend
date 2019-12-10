@@ -71,6 +71,27 @@ class Caller {
         });
     }
 
+    errorMsg(msg) {
+        let ary = stack()
+        ary.forEach((site, i) => {
+            if (i == 1) {
+                const func = site.getFunctionName() || 'anon'
+                const absoluteFile = site.getFileName()
+                const ary = absoluteFile.split("\/")
+                const relativeFile = ary[ary.length - 1]
+
+
+                const line = site.getLineNumber()
+                if (skip.hasOwnProperty(func)) {
+                    // do nothing
+                } else {
+                    console.log("ERROR: " + cc.bgRed(msg) + " | " + line + " | " + cc.bgYellowBright(func))
+                }
+            }
+        });
+    }
+
+
 	/* Show call stack but ignore noise */ 
     showStack() {
         let ary = stack()
