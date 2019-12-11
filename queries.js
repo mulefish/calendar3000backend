@@ -1,5 +1,6 @@
 const {Caller} = require('./Caller.js');
 const caller = new Caller(); 
+const cc = require('cli-color')
 const Pool = require('pg').Pool
 const database = 'calendar3000'
 const pool = new Pool({
@@ -11,7 +12,7 @@ const pool = new Pool({
 })
 
 const showDBMsg = () => {
-  caller.msg("database " + database)
+  caller.msg("database: " + cc.bgGreen(database))
 }
 // /////////////////////// NO-SQL //////////////////////////////////////////
 const insertJsonObject = (request, response) => {
@@ -171,6 +172,7 @@ const deleteUser = (request, response) => {
 
 const getHolidaysByYear = (request, response) => {
   caller.showStack()
+
   const year = parseInt(request.params.year)
   const d1 = new Date().getTime() 
   pool.query('SELECT data FROM holidays WHERE year = $1', [year], (error, results) => {
@@ -183,6 +185,7 @@ const getHolidaysByYear = (request, response) => {
       response.status(200).json(results.rows)
     }
   })
+
 }
 
 const createPerson = (request, response) => {

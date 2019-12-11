@@ -1,5 +1,6 @@
 const {Caller} = require('./Caller.js');
 const caller = new Caller(); 
+const cc = require('cli-color')
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
@@ -43,7 +44,7 @@ app.get('/people', db.getAllPeople)
 
 app.listen(port, () => {
   // console.log(`App running on port ${port}.`)
-  caller.msg(`Running on ${port}`)
+  caller.msg("Running on " + cc.bgGreen(port))
   db.showDBMsg()
 
 })
