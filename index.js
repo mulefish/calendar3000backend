@@ -4,7 +4,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 const db = require('./queries')
-const port = 3000  // TODO: add CONFIG 
+const port = 3030  // TODO: add CONFIG 
 
 
 app.use(express.static('public')) // Try about.html
@@ -37,7 +37,7 @@ app.get('/', (request, response) => {
 
 app.get('/holidays/:year', db.getHolidaysByYear)
 app.post('/people', db.createPerson)                              
-
+app.get('/people', db.getAllPeople)
 
 // /////////////////////// LISTENER ///////////////////////////////////////////
 

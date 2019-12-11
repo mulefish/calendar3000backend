@@ -186,20 +186,38 @@ const getHolidaysByYear = (request, response) => {
 }
 
 const createPerson = (request, response) => {
-  console.log("hello kitty ")
-  response.status(200).json("Hello world")
-  // const { name, email } = request.body
-  // caller.msg(`name ${name} email ${email}`)
-  // pool.query('INSERT INTO people (name, email) VALUES ($1, $2)', [name, email], (error, results) => {
-  //   if (error) {
-  //     caller.errorMsg( error )
-  //     response.status(500).send(`createPerson fail ${error}`)
-  //   }
-  //   else {
-  //     response.status(200).json("Person added")
-  //   }
-  // })
+  caller.showStack()
+  const { name, email } = request.body
+  const sql = `INSERT INTO people (name, email) VALUES ( ${name}, ${email})`
+  caller.msg(sql)
+  pool.query('INSERT INTO people (name, email) VALUES ($1, $2)', [name, email], (error, results) => {    
+    if (error) {
+      caller.errorMsg( error )
+      response.status(500).send(`createUser fail ${error}`)
+    }
+    else {
+      response.status(200).json("person created")
+      caller.msg("Success")
+    }
+  })
 }
+
+const getAllPeople = (request, response) => {
+  caller.showStack()
+  const sql = `SELECT * FROM people`
+  caller.msg(sql)
+  pool.query(sql, [], (error, results) => {    
+    if (error) {
+      caller.errorMsg( error )
+      response.status(500).send(`getAllPeople fail ${error}`)
+    }
+    else {
+      response.status(200).json(results.rows)      
+      caller.msg("Success")
+    }
+  })
+}
+
 
 // /////////////////////// END CALENDAR 3000 //////////////////////
 
@@ -216,5 +234,6 @@ module.exports = {
   // getJsonObjectsById,
   showDBMsg,
   getHolidaysByYear,
-  createPerson
+  createPerson,
+  getAllPeople
 }
